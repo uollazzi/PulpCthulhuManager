@@ -1,0 +1,24 @@
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+@if (scheda != null)
+{
+    <EditForm Model="@scheda" OnValidSubmit="salva">
+        <InputText @bind-Value="scheda.Nome"></InputText>
+        <CaratteristicaComponent caratteristica="scheda?.FOR"></CaratteristicaComponent>
+        <CaratteristicaComponent caratteristica="scheda?.DES"></CaratteristicaComponent>
+        <CaratteristicaComponent caratteristica="scheda?.COS"></CaratteristicaComponent>
+
+        <button type="submit">Salva</button>
+    </EditForm>
+}
+
+
+@code {
+    [Parameter]
+    public SchedaModel? scheda { get; set; }
+
+    private async void salva()
+    {
+        await localStorage.SetItemAsync("scheda", scheda);
+    }
+}

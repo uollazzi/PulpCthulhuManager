@@ -1,0 +1,21 @@
+﻿@if (caratteristica != null)
+{
+    <h3>@caratteristica.Nome</h3>
+
+    <div>
+        <InputNumber id="base" @bind-Value="caratteristica.Base" />
+    </div>
+
+    <div>
+        @caratteristica.Arduo
+    </div>
+    <div>
+        @caratteristica.Estremo
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public CaratteristicaModel? caratteristica { get; set; }
+}
