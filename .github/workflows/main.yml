@@ -36,10 +36,9 @@ jobs:
       run: touch release/wwwroot/.nojekyll
       
     - name: Commit wwwroot to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: crazy-max/ghaction-github-pages@v1.5.1
       with:
-        ACCESS_TOKEN: $
-        BASE_BRANCH: master # The branch the action should deploy from.
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: release/wwwroot # The folder the action should deploy.
-        SINGLE_COMMIT: true
+        target_branch: gh-pages
+        build_dir: release/wwwroot
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
