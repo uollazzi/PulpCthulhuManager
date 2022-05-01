@@ -5,11 +5,10 @@
 
 
 <div class="btn-group" role="group">
-    <button class="btn btn-outline-primary" @onclick="Nuova">Nuova</button>
-    <button class="btn btn-outline-primary" onclick="document.getElementById('selectedFile').click();">Importa</button>
-    <button class="btn btn-outline-primary" @onclick="Export">Esporta</button>
+    <button class="btn-primary bg-teal-900" @onclick="Nuova">Nuova</button>
+    <button class="btn-primary" onclick="document.getElementById('selectedFile').click();">Importa</button>
+    <button class="btn-primary" @onclick="Export">Esporta</button>
 </div>
-<hr>
 
 <InputFile id="selectedFile" OnChange="Import" style="display: none;" />
 

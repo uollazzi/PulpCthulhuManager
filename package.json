@@ -1,0 +1,24 @@
+{
+  "name": "pulpcthulhumanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tw": "npx tailwindcss -i ./src/style.css -o ./wwwroot/css/app.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uollazzi/PulpCthulhuManager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uollazzi/PulpCthulhuManager/issues"
+  },
+  "homepage": "https://github.com/uollazzi/PulpCthulhuManager#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "tailwindcss": "^3.0.24"
+  }
+}
