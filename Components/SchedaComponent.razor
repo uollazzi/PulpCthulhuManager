@@ -4,10 +4,35 @@
 {
     <EditForm Model="@scheda" OnValidSubmit="salva">
         <InputText @bind-Value="scheda.Nome"></InputText>
-        <CaratteristicaComponent caratteristica="scheda?.FOR"></CaratteristicaComponent>
-        <CaratteristicaComponent caratteristica="scheda?.DES"></CaratteristicaComponent>
-        <CaratteristicaComponent caratteristica="scheda?.COS"></CaratteristicaComponent>
+        <div class="flex flex-wrap items-stretch">
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.FOR"></CaratteristicaComponent>
+            </div>
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.DES"></CaratteristicaComponent>
+            </div>
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.INT"></CaratteristicaComponent>
+            </div>
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.COS"></CaratteristicaComponent>
+            </div>
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.FAS"></CaratteristicaComponent>
+            </div>
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.POT"></CaratteristicaComponent>
+            </div>
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.TAG"></CaratteristicaComponent>
+            </div>
+            <div class="flex-auto">
+                <CaratteristicaComponent caratteristica="scheda?.IST"></CaratteristicaComponent>
+            </div>
 
+        </div>
+
+        <hr>
         <button type="submit" class="btn btn-primary">Salva</button>
     </EditForm>
 }

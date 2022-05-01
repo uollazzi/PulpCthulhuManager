@@ -7,11 +7,11 @@
         
         }
 
-        public CaratteristicaModel(string nome, string abbreviazione, int valoreBase = 0)
+        public CaratteristicaModel(string nome, string abbreviazione)
         {
             Nome = nome;
             Abbreviazione = abbreviazione;
-            Base = valoreBase;
+            Base = 0;
         }
 
         public string Nome { get; set; } = string.Empty;
