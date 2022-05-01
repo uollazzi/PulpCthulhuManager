@@ -3,35 +3,30 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IJSRuntime JSRuntime
 
-<h3>Scheda</h3>
-<SchedaComponent scheda="@scheda"></SchedaComponent>
-<hr />
-<button type="button" @onclick="Export">Esporta Scheda</button>
-<hr />
+
+<div class="btn-group" role="group">
+    <button class="btn btn-outline-primary" @onclick="Nuova">Nuova</button>
+    <button class="btn btn-outline-primary" onclick="document.getElementById('selectedFile').click();">Importa</button>
+    <button class="btn btn-outline-primary" @onclick="Export">Esporta</button>
+</div>
+<hr>
 
 <InputFile id="selectedFile" OnChange="Import" style="display: none;" />
-<button type="button" onclick="document.getElementById('selectedFile').click();">Importa Scheda</button>
+
+<SchedaComponent scheda="@scheda"></SchedaComponent>
 
 @code {
     SchedaModel scheda = new SchedaModel();
 
     protected override async Task OnInitializedAsync()
     {
-        //SchedaModel ginger = new SchedaModel()
-        //    {
-        //        Nome = "Ginger Alato",
-        //        Giocatore = "Uollazzi"
-        //    };
-
-        //ginger.FOR.Base = 60;
-        //ginger.DES.Base = 70;
-        //ginger.COS.Base = 80;
-
-
-
         scheda = await localStorage.GetItemAsync<SchedaModel>("scheda");
     }
 
+    private void Nuova()
+    {
+        scheda = new SchedaModel();
+    }
     private async Task Export()
     {
         byte[] file = System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(scheda));
@@ -47,7 +42,7 @@
         if (schedaLoaed != null)
         {
             scheda = schedaLoaed;
-            this.StateHasChanged();            
+            this.StateHasChanged();
         }
     }
 

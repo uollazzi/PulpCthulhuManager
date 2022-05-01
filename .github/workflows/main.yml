@@ -39,8 +39,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4.3.3     
       with:
         branch: gh-pages
-        folder: release/wwwroot
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        folder: release/wwwroot        
 
     # - name: Commit wwwroot to GitHub Pages
     #   uses: crazy-max/ghaction-github-pages@v1.5.1      
