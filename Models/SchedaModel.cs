@@ -24,7 +24,7 @@
         public CaratteristicaModel IST { get; set; } = new CaratteristicaModel("Istruzione", "IST");
         #endregion
 
-        #region Abilita
+        #region Abilita        
         public List<AbilitaModel> Abilita { get; set; } = new List<AbilitaModel>()
         {
             new AbilitaModel("Ammaliare", 15),
@@ -77,6 +77,70 @@
             new AbilitaModel("Valore Credito", 0),
             new AbilitaModel("Valutare", 5)
         };
+        #endregion
+
+        #region Tattiche
+        public string BonusDanno
+        {
+            get => CalcolaBonusDannoStruttura().BonusDanno;
+        }
+
+        public int Struttura { get => CalcolaBonusDannoStruttura().Struttura; }
+
+        public int Movimento
+        {
+            get
+            {
+                if (DES.Base < TAG.Base && FOR.Base < TAG.Base)
+                {
+                    return 7;
+                }
+                else if (DES.Base >= TAG.Base || FOR.Base >= TAG.Base)
+                {
+                    return 8;
+                }
+                else { return 9; }
+            }
+        }
+
+        private (string BonusDanno, int Struttura) CalcolaBonusDannoStruttura()
+        {
+            (string BonusDanno, int Struttura) retval = ("Nessuno", 0);
+            var forTag = FOR.Base + TAG.Base;
+
+            if (forTag <= 64)
+            {
+                retval.BonusDanno = "-2";
+                retval.Struttura = -2;
+            }
+            else if (forTag <= 84)
+            {
+                retval.BonusDanno = "-1";
+                retval.Struttura = -1;
+            }
+            else if (forTag <= 124)
+            {
+                retval.BonusDanno = "Nessuno";
+                retval.Struttura = 0;
+            }
+            else if (forTag <= 164)
+            {
+                retval.BonusDanno = "+1D4";
+                retval.Struttura = 1;
+            }
+            else if (forTag <= 204)
+            {
+                retval.BonusDanno = "+1D6";
+                retval.Struttura = +2;
+            }
+            else
+            {
+                retval.BonusDanno = "+2D6";
+                retval.Struttura = +3;
+            }
+
+            return retval;
+        }
         #endregion
     }
 }

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tw": "npx tailwindcss -i ./src/style.css -o ./wwwroot/css/app.css --watch",
-    "tw:prod": "npx tailwindcss -i ./src/style.css -o ./wwwroot/css/app.css --minify"
+    "tw:prod": "npx tailwindcss -i ./src/style.css -o ./wwwroot/css/app.css --minify",
+    "publish": "npm run tw:prod && dotnet publish -c Release -o release && firebase deploy"
   },
   "repository": {
     "type": "git",

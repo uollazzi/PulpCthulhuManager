@@ -4,30 +4,35 @@
 @if (scheda != null)
 {
     <EditForm Model="@scheda" OnValidSubmit="salva">
-        <InputText @bind-Value="scheda.Nome"></InputText>
-        <div class="flex flex-wrap">
-            <div class="flex-[25%] lg:flex-1">
+        <p>
+            <InputText @bind-Value="scheda.Nome"></InputText>
+        </p>
+        <p>BD: @scheda.BonusDanno</p>
+        <p>Struttura: @scheda.Struttura</p>
+        <p>Movimento: @scheda.Movimento</p>
+        <div class="flex flex-wrap border border-slate-900">
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
                 <CaratteristicaComponent caratteristica="scheda?.FOR"></CaratteristicaComponent>
             </div>
-            <div class="flex-[25%] lg:flex-1">
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
                 <CaratteristicaComponent caratteristica="scheda?.DES"></CaratteristicaComponent>
             </div>
-            <div class="flex-[25%] lg:flex-1">
-                <CaratteristicaComponent caratteristica="scheda?.INT"></CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1">
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
                 <CaratteristicaComponent caratteristica="scheda?.COS"></CaratteristicaComponent>
             </div>
-            <div class="flex-[25%] lg:flex-1">
-                <CaratteristicaComponent caratteristica="scheda?.FAS"></CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1">
-                <CaratteristicaComponent caratteristica="scheda?.POT"></CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1">
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
                 <CaratteristicaComponent caratteristica="scheda?.TAG"></CaratteristicaComponent>
             </div>
-            <div class="flex-[25%] lg:flex-1">
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                <CaratteristicaComponent caratteristica="scheda?.FAS"></CaratteristicaComponent>
+            </div>
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                <CaratteristicaComponent caratteristica="scheda?.INT"></CaratteristicaComponent>
+            </div>
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                <CaratteristicaComponent caratteristica="scheda?.POT"></CaratteristicaComponent>
+            </div>
+            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
                 <CaratteristicaComponent caratteristica="scheda?.IST"></CaratteristicaComponent>
             </div>
         </div>
