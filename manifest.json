@@ -1,7 +1,7 @@
 {
   "name": "PulpCthulhuManager",
   "short_name": "PulpCthulhuManager",
-  "start_url": "./",
+  "start_url": "./PulpCthulhuManager/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#03173d",
