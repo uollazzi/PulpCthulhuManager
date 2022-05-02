@@ -1,38 +1,52 @@
 ﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IJSRuntime JSRuntime
 
 @if (scheda != null)
 {
     <EditForm Model="@scheda" OnValidSubmit="salva">
         <InputText @bind-Value="scheda.Nome"></InputText>
-        <div class="flex flex-wrap items-stretch">
-            <div class="flex-auto">
+        <div class="flex flex-wrap">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.FOR"></CaratteristicaComponent>
             </div>
-            <div class="flex-auto">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.DES"></CaratteristicaComponent>
             </div>
-            <div class="flex-auto">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.INT"></CaratteristicaComponent>
             </div>
-            <div class="flex-auto">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.COS"></CaratteristicaComponent>
             </div>
-            <div class="flex-auto">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.FAS"></CaratteristicaComponent>
             </div>
-            <div class="flex-auto">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.POT"></CaratteristicaComponent>
             </div>
-            <div class="flex-auto">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.TAG"></CaratteristicaComponent>
             </div>
-            <div class="flex-auto">
+            <div class="flex-[25%] lg:flex-1">
                 <CaratteristicaComponent caratteristica="scheda?.IST"></CaratteristicaComponent>
             </div>
-
+        </div>
+        <br>
+        <div class="flex border border-slate-900">
+            <input class="w-full px-2" @bind-value="cercaAbilita" @bind-value:event="oninput"
+            placeholder="Cerca abilità..." />
+            <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">X</button>
+        </div>
+        <div class="flex flex-wrap border-x border-b border-slate-900">
+            @foreach (var abilita in scheda.Abilita.Where(a => a.Nome.ToLower().Contains(cercaAbilita.ToLower())).OrderBy(o
+           => o.Nome))
+            {
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <AbilitaComponent abilita="abilita"></AbilitaComponent>
+                </div>
+            }
         </div>
 
-        <hr>
         <button type="submit" class="btn btn-primary">Salva</button>
     </EditForm>
 }
@@ -42,8 +56,16 @@
     [Parameter]
     public SchedaModel? scheda { get; set; }
 
+    private string cercaAbilita { get; set; } = "";
+
     private async void salva()
     {
         await localStorage.SetItemAsync("scheda", scheda);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        JSRuntime.InvokeVoidAsync("makeSelectable");
     }
 }

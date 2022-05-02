@@ -1,0 +1,21 @@
+@if (abilita != null)
+{
+    <div class="flex p-2 gap-2">
+        <div class="leading-6 flex-grow-0">
+            <InputCheckbox @bind-Value="abilita.Utilizzata"></InputCheckbox>
+        </div>
+        <div class="leading-6 flex-auto text-sm">
+            @abilita.Nome
+        </div>
+        <div class="leading-6 flex-grow-0">
+            <InputNumber class="w-10 font-bold text-center select-all" @bind-Value="abilita.Base" />
+        </div>
+        <div class="leading-6 text-sm flex-[0_0_40px]">@abilita.Arduo/@abilita.Estremo</div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public AbilitaModel? abilita { get; set; }
+}

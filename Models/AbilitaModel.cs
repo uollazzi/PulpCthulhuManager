@@ -7,10 +7,11 @@ namespace PulpCthulhuManager.Models
 
         }
 
-        public AbilitaModel(string nome, int valoreDefault = 0)
+        public AbilitaModel(string nome, int valoreDefault = 0, bool combattimento = false)
         {
             Nome = nome;
             Base = valoreDefault;
+            Combattimento = combattimento;
         }
 
         public string Nome { get; set; } = string.Empty;
