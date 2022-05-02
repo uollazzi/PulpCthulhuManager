@@ -201,7 +201,7 @@
       "url": "_framework\/System.Threading.dll"
     },
     {
-      "hash": "sha256-Jl95fi+XKsYkhVVzqIe\/2KVklFM8KXTYs0Q6RtoSgmk=",
+      "hash": "sha256-fJEIFj0cj6KxB3MRBG7P5pc5\/YLzgFUAT6Yu1Xo8RkU=",
       "url": "css\/app.css"
     },
     {
@@ -221,7 +221,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-QMzs7BhGa0mEAH81o9PradTRLmkU3HTauoBt1jgXJYw=",
+      "hash": "sha256-2h4bVmlJVY3mRs2gkhwJbNu0IoEkmipgMuOoazLJxxc=",
       "url": "index.html"
     },
     {
@@ -233,5 +233,5 @@
       "url": "manifest.json"
     }
   ],
-  "version": "lrjkVcrc"
+  "version": "Pk4rUFWi"
 };
