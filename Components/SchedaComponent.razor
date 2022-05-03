@@ -17,28 +17,36 @@
         <p>Sanità Massima: @scheda.SanitaMassima</p>
         <div class="flex flex-wrap border border-slate-900">
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.FOR"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.FOR" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.DES"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.DES" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.COS"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.COS" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.TAG"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.TAG" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.FAS"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.FAS" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.INT"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.INT" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.POT"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.POT" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent caratteristica="scheda?.IST"></CaratteristicaComponent>
+                <CaratteristicaComponent Caratteristica="scheda.IST" CaratteristicaChanged="@UpdateUI">
+                </CaratteristicaComponent>
             </div>
         </div>
         <br>
@@ -77,5 +85,10 @@
     {
         base.OnAfterRender(firstRender);
         JSRuntime.InvokeVoidAsync("makeSelectable");
+    }
+
+    private void UpdateUI(CaratteristicaModel e)
+    {
+        @* Console.WriteLine($"{e.Abbreviazione}: {e.Base}");         *@
     }
 }

@@ -1,18 +1,29 @@
-﻿@if (caratteristica != null)
+﻿@if (Caratteristica != null)
 {
     <div class="flex flex-col p-2 items-center">
         <div class="text-center leading-6">
-            @caratteristica.Abbreviazione
+            @Caratteristica.Abbreviazione
         </div>
         <div class=" leading-6">
-            <input class="w-12 font-bold text-center text-lg select-all" @bind-value="caratteristica.Base" @bind-value:event="oninput" />
+            <input class="w-12 font-bold text-center text-lg select-all" value="@Caratteristica.Base"
+            @oninput="OnCaratteristicaBaseChanged" min="0" required />
         </div>
-        <div class=" leading-6 text-xs text-center">@caratteristica.Arduo/@caratteristica.Estremo</div>
+        <div class="leading-6 text-xs text-center">@Caratteristica.Arduo/@Caratteristica.Estremo</div>
     </div>
 }
 
 
 @code {
     [Parameter]
-    public CaratteristicaModel? caratteristica { get; set; }
+    public CaratteristicaModel Caratteristica { get; set; } = new CaratteristicaModel();
+
+    [Parameter]
+    public EventCallback<CaratteristicaModel> CaratteristicaChanged { get; set; }
+
+    private async Task OnCaratteristicaBaseChanged(ChangeEventArgs e)
+    {        
+        var v = !string.IsNullOrEmpty(e.Value?.ToString()) ? Convert.ToInt32(e.Value) : 0;
+        Caratteristica.Base = v;
+        await CaratteristicaChanged.InvokeAsync(Caratteristica);
+    }
 }
