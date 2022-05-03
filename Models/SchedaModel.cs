@@ -2,6 +2,9 @@
 {
     public class SchedaModel
     {
+        const string TAG_MITI_CTHULHU = "MITI_CTHULHU";
+        const string TAG_SCHIVARE = "SCHIVARE";
+
         #region Anagrafica
         public string Nome { get; set; } = string.Empty;
         public string Giocatore { get; set; } = string.Empty;
@@ -51,7 +54,7 @@
             new AbilitaModel("Lingua (Madre)(IST)", 1),
             new AbilitaModel("Manovrare Macchinari Pesanti", 1),
             new AbilitaModel("Medicina", 1),
-            new AbilitaModel("Miti di Cthulhu", 0),
+            new AbilitaModel("Miti di Cthulhu", 0, false, TAG_MITI_CTHULHU),
             new AbilitaModel("Naturalistica", 10),
             new AbilitaModel("Navigare", 10),
             new AbilitaModel("Nuotare", 20),
@@ -68,7 +71,7 @@
             new AbilitaModel("Saltare", 20),
             new AbilitaModel("Scalare", 20),
             new AbilitaModel("Scassinare", 1),
-            new AbilitaModel("Schivare", 0),
+            new AbilitaModel("Schivare", 0, false, TAG_SCHIVARE),
             new AbilitaModel("Scienza", 1),
             new AbilitaModel("Seguire Tracce", 10),
             new AbilitaModel("Sopravvivenza", 10),
@@ -95,13 +98,56 @@
                 {
                     return 7;
                 }
-                else if (DES.Base >= TAG.Base || FOR.Base >= TAG.Base)
+                else if (DES.Base > TAG.Base && FOR.Base > TAG.Base)
                 {
-                    return 8;
+                    return 9;
                 }
-                else { return 9; }
+                else { return 8; }
             }
         }
+
+        public int PuntiFeritaMassimi { get => (int)Math.Round((double)(COS.Base + TAG.Base) / 5, MidpointRounding.ToEven); }
+
+        private int puntiFeritaAttuali;
+        public int PuntiFeritaAttuali
+        {
+            get { return puntiFeritaAttuali; }
+            set
+            {
+                if (value > PuntiFeritaMassimi)
+                    value = PuntiFeritaMassimi;
+
+                if (value < 0)
+                    value = 0;
+
+                puntiFeritaAttuali = value;
+            }
+        }
+
+        public int PuntiMagiaMassimi { get => (int)Math.Round((double)(POT.Base / 5), MidpointRounding.ToEven); }
+        private int puntiMagiaAttuali;
+        public int PuntiMagiaAttuali
+        {
+            get { return puntiMagiaAttuali; }
+            set
+            {
+                if (value > PuntiMagiaMassimi)
+                    value = PuntiMagiaMassimi;
+
+                if (value < 0)
+                    value = 0;
+
+                puntiMagiaAttuali = value;
+            }
+        }
+
+        public int Sanita { get; set; }
+        public int SanitaIniziale { get; set; }
+        public int SanitaMassima { get => 99 - Abilita.Single(a => a.Tag == TAG_MITI_CTHULHU).Base; }
+        public bool TemporaneamentePazzo { get; set; } = false;
+        public bool PermanentementePazzo { get; set; } = false;
+        public bool Morente { get => PuntiFeritaAttuali <= 0; }
+        public int Fortuna { get; set; }
 
         private (string BonusDanno, int Struttura) CalcolaBonusDannoStruttura()
         {
@@ -131,12 +177,13 @@
             else if (forTag <= 204)
             {
                 retval.BonusDanno = "+1D6";
-                retval.Struttura = +2;
+                retval.Struttura = 2;
             }
             else
             {
-                retval.BonusDanno = "+2D6";
-                retval.Struttura = +3;
+                var multiplo = (int)Math.Ceiling(((double)forTag - 204) / 80);
+                retval.BonusDanno = $"+{1 + multiplo}D6";
+                retval.Struttura = 2 + multiplo;
             }
 
             return retval;

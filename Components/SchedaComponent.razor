@@ -10,6 +10,11 @@
         <p>BD: @scheda.BonusDanno</p>
         <p>Struttura: @scheda.Struttura</p>
         <p>Movimento: @scheda.Movimento</p>
+        <p>PF Massimi: @scheda.PuntiFeritaMassimi</p>
+        <p>PF Attuali: @scheda.PuntiFeritaAttuali</p>
+        <p>PM Massimi: @scheda.PuntiMagiaMassimi</p>
+        <p>PM Attuali: @scheda.PuntiMagiaAttuali</p>
+        <p>Sanità Massima: @scheda.SanitaMassima</p>
         <div class="flex flex-wrap border border-slate-900">
             <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
                 <CaratteristicaComponent caratteristica="scheda?.FOR"></CaratteristicaComponent>
@@ -43,7 +48,7 @@
             <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">X</button>
         </div>
         <div class="flex flex-wrap border-x border-b border-slate-900">
-            @foreach (var abilita in scheda.Abilita.Where(a => a.Nome.ToLower().Contains(cercaAbilita.ToLower())).OrderBy(o
+            @foreach (var abilita in scheda!.Abilita.Where(a => a.Nome.ToLower().Contains(cercaAbilita.ToLower())).OrderBy(o
            => o.Nome))
             {
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
