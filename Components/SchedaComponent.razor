@@ -62,10 +62,11 @@
            => o.Nome))
             {
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
-                    <AbilitaComponent abilita="abilita"></AbilitaComponent>
+                    <AbilitaComponent abilita="abilita" OnDelete="Delete"></AbilitaComponent>
                 </div>
             }
         </div>
+        <NuovaAbilitaComponent OnNuovaAbilita="Add"></NuovaAbilitaComponent>
     </EditForm>
 }
 
@@ -91,5 +92,13 @@
     private void UpdateUI(CaratteristicaModel e)
     {
         @* Console.WriteLine($"{e.Abbreviazione}: {e.Base}"); *@
+    }
+
+    private void Add(AbilitaModel e) {        
+        scheda!.Abilita.Add(e);
+    }
+
+    private void Delete(AbilitaModel e) {        
+        scheda!.Abilita.Remove(e);
     }
 }

@@ -1,0 +1,24 @@
+<div class="flex border border-slate-900 items-center">
+    <button class="btn-primary" @onclick="Add">Aggiungi</button>
+    <InputCheckbox class="m-2" @bind-Value="abilita.Combattimento"></InputCheckbox>
+    <div class="whitespace-nowrap">
+        da combattimento?
+    </div>
+    <input type="text" class="w-full px-2" @bind-value="abilita.Nome" placeholder="Nome abilità" />
+
+</div>
+
+@code {
+    private AbilitaModel abilita = new AbilitaModel();
+
+    [Parameter]
+    public EventCallback<AbilitaModel> OnNuovaAbilita { get; set; }
+
+    private void Add()
+    {
+        abilita.Base = 0;
+        abilita.Custom = true;
+        OnNuovaAbilita.InvokeAsync(abilita);
+        abilita = new AbilitaModel();
+    }
+}

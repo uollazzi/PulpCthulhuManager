@@ -7,6 +7,12 @@
         <div class="leading-6 flex-auto text-sm">
             @abilita.Nome
         </div>
+        @if (abilita.Custom)
+        {
+            <button type="button" @onclick="Delete">
+                <IconComponent IconName="delete"></IconComponent>
+            </button>
+        }
         <div class="leading-6 flex-grow-0">
             <InputNumber class="w-10 font-bold text-right select-all" @bind-Value="abilita.Base" />
         </div>
@@ -18,4 +24,12 @@
 @code {
     [Parameter]
     public AbilitaModel? abilita { get; set; }
+
+    [Parameter]
+    public EventCallback<AbilitaModel> OnDelete { get; set; }
+
+    private async void Delete()
+    {
+        await OnDelete.InvokeAsync(abilita);
+    }
 }
