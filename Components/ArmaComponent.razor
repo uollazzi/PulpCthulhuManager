@@ -1,0 +1,30 @@
+@if (Arma != null)
+{
+    <div class="flex gap-2">
+        <div>
+            @Arma.Nome
+        </div>
+        <div>
+            @Abilita!.Base / @Abilita!.Arduo / @Abilita!.Estremo
+        </div>
+        <button type="button" @onclick="Delete">
+            <IconComponent IconName="delete"></IconComponent>
+        </button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public ArmaModel? Arma { get; set; }
+
+    [Parameter]
+    public AbilitaModel? Abilita { get; set; }
+
+    [Parameter]
+    public EventCallback<ArmaModel> OnDelete { get; set; }
+
+    private async void Delete()
+    {
+        await OnDelete.InvokeAsync(Arma);
+    }
+}

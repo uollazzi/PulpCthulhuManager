@@ -34,7 +34,7 @@
             new AbilitaModel("Archeologia", 1),
             new AbilitaModel("Armi da Fuoco (Fucile/Shotgun)", 25, true),
             new AbilitaModel("Armi da Fuoco (Pistola)", 25, true),
-            new AbilitaModel("Armi da Fuoco (Mitra)", 15, true),            
+            new AbilitaModel("Armi da Fuoco (Mitra)", 15, true),
             new AbilitaModel("Ascoltare", 20),
             new AbilitaModel("Biblioteconomia", 20),
             new AbilitaModel("Cammuffare", 5),
@@ -48,7 +48,7 @@
             new AbilitaModel("Individuare", 25),
             new AbilitaModel("Lanciare", 20),
             new AbilitaModel("Legge", 5),
-            new AbilitaModel("Leggere Labbra", 1),            
+            new AbilitaModel("Leggere Labbra", 1),
             new AbilitaModel("Lingua (Madre)(IST)", 1),
             new AbilitaModel("Manovrare Macchinari Pesanti", 1),
             new AbilitaModel("Medicina", 1),
@@ -57,7 +57,7 @@
             new AbilitaModel("Navigare", 10),
             new AbilitaModel("Nuotare", 20),
             new AbilitaModel("Occultismo", 5),
-            new AbilitaModel("Persuadere", 10),            
+            new AbilitaModel("Persuadere", 10),
             new AbilitaModel("Pronto Soccorso", 30),
             new AbilitaModel("Psicoanalisi", 1),
             new AbilitaModel("Psicologia", 10),
@@ -68,8 +68,8 @@
             new AbilitaModel("Saltare", 20),
             new AbilitaModel("Scalare", 20),
             new AbilitaModel("Scassinare", 1),
-            new AbilitaModel("Schivare", 0, false, TAG_SCHIVARE),            
-            new AbilitaModel("Seguire Tracce", 10),            
+            new AbilitaModel("Schivare", 0, false, TAG_SCHIVARE),
+            new AbilitaModel("Seguire Tracce", 10),
             new AbilitaModel("Storia", 5),
             new AbilitaModel("Usare Computer", 0),
             new AbilitaModel("Valore Credito", 0),
@@ -143,6 +143,10 @@
         public bool PermanentementePazzo { get; set; } = false;
         public bool Morente { get => PuntiFeritaAttuali <= 0; }
         public int Fortuna { get; set; }
+
+        public List<ArmaModel> Armi = new List<ArmaModel>() {
+            new ArmaModel("Disarmato", "Combattere (Rissa)")
+        };
 
         private (string BonusDanno, int Struttura) CalcolaBonusDannoStruttura()
         {

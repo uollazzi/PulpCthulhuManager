@@ -53,7 +53,7 @@
         </div>
         <br>
         <div class="flex border border-slate-900">
-            <input class="w-full px-2" @bind-value="cercaAbilita" @bind-value:event="oninput"
+            <input class="w-full px-2 text-sm" @bind-value="cercaAbilita" @bind-value:event="oninput"
             placeholder="Cerca abilità..." />
             <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">X</button>
         </div>
@@ -62,11 +62,19 @@
            => o.Nome))
             {
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
-                    <AbilitaComponent abilita="abilita" OnDelete="Delete"></AbilitaComponent>
+                    <AbilitaComponent abilita="abilita" OnDelete="DeleteAbilita"></AbilitaComponent>
                 </div>
             }
         </div>
-        <NuovaAbilitaComponent OnNuovaAbilita="Add"></NuovaAbilitaComponent>
+        <NuovaAbilitaComponent OnNuovaAbilita="AddAbilita"></NuovaAbilitaComponent>
+        <br>
+        @foreach (var arma in scheda!.Armi)
+        {
+            <ArmaComponent Arma="arma" Abilita="@(scheda.Abilita.Single(s => s.Nome == arma.NomeAbilita))"
+        OnDelete="DeleteArma"></ArmaComponent>
+        }
+        <NuovaArmaComponent OnNuovaArma="AddArma" ElencoAbilita="scheda!.Abilita.Where(s => s.Combattimento).ToList()">
+        </NuovaArmaComponent>
     </EditForm>
 }
 
@@ -94,11 +102,23 @@
         @* Console.WriteLine($"{e.Abbreviazione}: {e.Base}"); *@
     }
 
-    private void Add(AbilitaModel e) {        
+    private void AddAbilita(AbilitaModel e)
+    {
         scheda!.Abilita.Add(e);
     }
 
-    private void Delete(AbilitaModel e) {        
+    private void DeleteAbilita(AbilitaModel e)
+    {
         scheda!.Abilita.Remove(e);
+    }
+
+    private void AddArma(ArmaModel e)
+    {
+        scheda!.Armi.Add(e);
+    }
+
+    private void DeleteArma(ArmaModel e)
+    {
+        scheda!.Armi.Remove(e);
     }
 }

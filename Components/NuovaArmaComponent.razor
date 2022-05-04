@@ -1,0 +1,27 @@
+<div class="flex border-x border-b border-slate-900 items-center">
+    <button class="btn-primary" @onclick="Add">Aggiungi</button>
+    <input type="text" class="px-2 text-sm" @bind-value="arma.Nome" placeholder="Nome arma" />
+    <InputSelect @bind-Value="arma.NomeAbilita" class="text-sm">
+        @foreach (var abilitaCombattimento in ElencoAbilita)
+        {
+            <option value="@abilitaCombattimento.Nome">@abilitaCombattimento.Nome</option>
+        }
+
+    </InputSelect>
+</div>
+
+@code {
+    private ArmaModel arma = new ArmaModel();
+
+    [Parameter]
+    public EventCallback<ArmaModel> OnNuovaArma { get; set; }
+
+    [Parameter]
+    public List<AbilitaModel> ElencoAbilita { get; set; } = new List<AbilitaModel>();
+
+    private void Add()
+    {
+        OnNuovaArma.InvokeAsync(arma);
+        arma = new ArmaModel();
+    }
+}
