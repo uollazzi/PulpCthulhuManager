@@ -1,11 +1,10 @@
 <div class="flex border-x border-b border-slate-900 items-center">
-    <button class="btn-primary" @onclick="Add">Aggiungi</button>
+    <button class="btn-primary" @onclick="Add"><IconComponent IconName="add"></IconComponent></button>    
     <InputCheckbox class="m-2" @bind-Value="abilita.Combattimento"></InputCheckbox>
     <div class="whitespace-nowrap text-sm">
-        combattimento?
+        combat?
     </div>
     <input type="text" class="w-full px-2 text-sm" @bind-value="abilita.Nome" placeholder="Nome abilità" />
-
 </div>
 
 @code {

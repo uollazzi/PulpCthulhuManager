@@ -24,6 +24,18 @@
     background-color: transparent;
   }
 
+  /* CHECKBOX TOGGLE SWITCH */
+  /* @apply rules for documentation, these do not work as inline style */
+  .toggle-checkbox:checked {
+    @apply: right-0 border-teal-900;
+    right: 0;
+    border-color: rgb(19, 78, 74);
+  }
+
+  .toggle-checkbox:checked + .toggle-label {
+    @apply: bg-teal-900;
+    background-color: rgb(19, 78, 74);
+  }
 }
 @layer components {
   .btn-primary {
