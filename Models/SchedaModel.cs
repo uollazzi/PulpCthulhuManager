@@ -144,8 +144,8 @@
         public bool Morente { get => PuntiFeritaAttuali <= 0; }
         public int Fortuna { get; set; }
 
-        public List<ArmaModel> Armi = new List<ArmaModel>() {
-            new ArmaModel("Disarmato", "Combattere (Rissa)")
+        public List<ArmaModel> Armi { get; set; } = new List<ArmaModel>() {
+            new ArmaModel("Disarmato", "Combattere (Rissa)", "1D3","1",true)
         };
 
         private (string BonusDanno, int Struttura) CalcolaBonusDannoStruttura()

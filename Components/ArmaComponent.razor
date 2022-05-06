@@ -1,15 +1,33 @@
 @if (Arma != null)
 {
     <div class="flex p-2 gap-2">
-        <div class="leading-6 text-sm">
+        <div class="leading-6 text-sm flex-auto font-bold">
             @Arma.Nome
         </div>
-        <div class="leading-6 text-sm">
+        <div class="leading-6 text-sm font-bold">
             @Abilita!.Base / @Abilita!.Arduo / @Abilita!.Estremo
         </div>
         <button type="button" @onclick="Delete">
             <i class="bi bi-trash-fill"></i>
         </button>
+    </div>
+    <div class="flex flex-row p-2 gap-2">
+        <div class="leading-6 text-sm flex-auto">
+            Danni<br>
+            <div class="font-bold">@(Arma.ApplicaBonusDanno ? Arma.Danni + BonusDanno : Arma.Danni)</div>
+        </div>
+        <div class="leading-6 text-sm flex-auto">
+            Gittata<br>@Arma.Gittata
+        </div>
+        <div class="leading-6 text-sm text-center">
+            Attacchi<br>@Arma.Attacchi
+        </div>
+        <div class="leading-6 text-sm text-center">
+            Muniz.<br>@Arma.Munizioni
+        </div>
+        <div class="leading-6 text-sm text-center">
+            Malf.<br>@Arma.Malfunzionamento
+        </div>
     </div>
 }
 
@@ -19,6 +37,9 @@
 
     [Parameter]
     public AbilitaModel? Abilita { get; set; }
+
+    [Parameter]
+    public string BonusDanno { get; set; } = string.Empty;
 
     [Parameter]
     public EventCallback<ArmaModel> OnDelete { get; set; }

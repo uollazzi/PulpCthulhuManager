@@ -75,7 +75,7 @@
             {
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
                     <ArmaComponent Arma="arma" Abilita="@(scheda.Abilita.Single(s => s.Nome == arma.NomeAbilita))"
-                OnDelete="DeleteArma"></ArmaComponent>
+                OnDelete="DeleteArma" BonusDanno="@scheda.BonusDanno"></ArmaComponent>
                 </div>
             }
         </div>
@@ -91,7 +91,7 @@
 
     private string cercaAbilita { get; set; } = "";
 
-    private async void salva()
+    private async void Salva()
     {
         await localStorage.SetItemAsync("scheda", scheda);
     }
@@ -100,7 +100,7 @@
     {
         base.OnAfterRender(firstRender);
         if (firstRender) JSRuntime.InvokeVoidAsync("makeSelectable");
-        salva();
+        Salva();
     }
 
     private void UpdateUI(CaratteristicaModel e)
@@ -111,20 +111,24 @@
     private void AddAbilita(AbilitaModel e)
     {
         scheda!.Abilita.Add(e);
+        Salva();
     }
 
     private void DeleteAbilita(AbilitaModel e)
     {
         scheda!.Abilita.Remove(e);
+        Salva();
     }
 
     private void AddArma(ArmaModel e)
     {
         scheda!.Armi.Add(e);
+        Salva();
     }
 
     private void DeleteArma(ArmaModel e)
     {
         scheda!.Armi.Remove(e);
+        Salva();
     }
 }

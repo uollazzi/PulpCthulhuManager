@@ -15,6 +15,33 @@
                 <input id="nomeArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Nome" />
             </div>
             <div class="mb-4">
+                <label for="danniArma" class="text-slate-400">Danni</label>
+                <input id="danniArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Danni" />
+            </div>
+            <div class="mb-4">
+                <label for="gittataArma" class="text-slate-400">Gittata</label>
+                <input id="gittataArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Gittata" />
+            </div>
+            <div class="mb-4">
+                <label for="attacchiArma" class="text-slate-400">Attacchi</label>
+                <input id="attacchiArma" type="text" class="w-full border border-slate-900 p-2"
+                @bind-value="arma.Attacchi" />
+            </div>
+            <div class="mb-4">
+                <label for="munizioniArma" class="text-slate-400">Munizioni</label>
+                <input id="munizioniArma" type="number" class="w-full border border-slate-900 p-2"
+                @bind-value="arma.Munizioni" />
+            </div>
+            <div class="mb-4">
+                <label for="malfunzionamentoArma" class="text-slate-400">Malf.</label>
+                <input id="malfunzionamentoArma" type="number" class="w-full border border-slate-900 p-2"
+                @bind-value="arma.Malfunzionamento" />
+            </div>
+            <div class="mb-4">
+                <InputCheckbox id="hasBonusDanno" class="m-2" @bind-Value="arma.ApplicaBonusDanno"></InputCheckbox>
+                <label for="hasBonusDanno" class="text-slate-400">Applica Bonus al Danno</label>
+            </div>
+            <div class="mb-4">
                 <label for="nomeAbilita" class="text-slate-400">Specifica Abilità</label>
                 <ul id="nomeAbilita">
                     @foreach (var abilitaCombattimento in ElencoAbilita.OrderBy(o => o.Nome))
@@ -27,6 +54,7 @@
                     }
                 </ul>
             </div>
+
         </div>
     </div>
 }
