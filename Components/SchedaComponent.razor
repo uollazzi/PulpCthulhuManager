@@ -68,11 +68,15 @@
         </div>
         <NuovaAbilitaComponent OnNuovaAbilita="AddAbilita"></NuovaAbilitaComponent>
         <br>
-        @foreach (var arma in scheda!.Armi)
-        {
-            <ArmaComponent Arma="arma" Abilita="@(scheda.Abilita.Single(s => s.Nome == arma.NomeAbilita))"
-        OnDelete="DeleteArma"></ArmaComponent>
-        }
+        <div class="flex flex-wrap border border-slate-900">
+            @foreach (var arma in scheda!.Armi)
+            {
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <ArmaComponent Arma="arma" Abilita="@(scheda.Abilita.Single(s => s.Nome == arma.NomeAbilita))"
+                OnDelete="DeleteArma"></ArmaComponent>
+                </div>
+            }
+        </div>
         <NuovaArmaComponent OnNuovaArma="AddArma" ElencoAbilita="scheda!.Abilita.Where(s => s.Combattimento).ToList()">
         </NuovaArmaComponent>
     </EditForm>

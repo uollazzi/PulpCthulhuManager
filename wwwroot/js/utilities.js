@@ -5,3 +5,8 @@ function makeSelectable() {
         });
     });
 }
+
+function bodyOverflow(hidden) {
+    const body = document.querySelector("body");
+    body.style.overflow = hidden ? "hidden" : "auto";
+}

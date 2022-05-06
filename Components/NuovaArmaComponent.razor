@@ -1,34 +1,30 @@
-<div class="flex border-x border-b border-slate-900 items-center">
-
-    <div class="whitespace-nowrap p-2 cursor-pointer text-xs text-teal-900 font-bold" @onclick="ModalAbilita">@(string.IsNullOrEmpty(arma.NomeAbilita) ? "Scegli Abilità" :
-        arma.NomeAbilita)</div>
-    <input type="text" class="px-2 text-sm w-full" @bind-value="arma.Nome" placeholder="Nome arma" />
-    @* <InputSelect @bind-Value="arma.NomeAbilita" class="text-sm">
-        @foreach (var abilitaCombattimento in ElencoAbilita)
-        {
-        <option value="@abilitaCombattimento.Nome">@abilitaCombattimento.Nome</option>
-        }
-
-        </InputSelect> *@
-</div>
-<button class="btn-primary" @onclick="Add"><IconComponent IconName="add"></IconComponent></button>
+@inject IJSRuntime JSRuntime
+<button class="btn-primary w-full" @onclick="ModalAbilita">Aggiungi nuova arma</button>
 
 @if (isModalAbilitaOpen)
 {
-    <div class="fixed z-10 left-0 top-0 w-full h-full overflow-auto bg-slate-200">
+    <div class="fixed z-10 left-0 top-0 w-full h-screen overflow-y-hidden bg-white flex justify-center items-center">
         <div class="mx-4 my-auto p-4 bg-white">
-            <ul>
-                @foreach (var abilitaCombattimento in ElencoAbilita)
-                {
-                    <li class="cursor-pointer" @onclick="@(() => SelectAbilita(abilitaCombattimento.Nome))">
-                        @abilitaCombattimento.Nome</li>
-                }
-            </ul>
+            <div class="mb-4">
+                <label for="nomeArma" class="text-slate-400">Nome</label>
+                <input id="nomeArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Nome" />
+            </div>
+            <div class="mb-4">
+                <label for="nomeAbilita" class="text-slate-400">Specifica Abilità</label>
+                <ul id="nomeAbilita">
+                    @foreach (var abilitaCombattimento in ElencoAbilita)
+                    {
+                        <li @onclick="@(() => SelectAbilita(abilitaCombattimento.Nome))">
+                            <div class="cursor-pointer text-teal-900">
+                                @abilitaCombattimento.Nome
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
-
     </div>
 }
-
 
 @code {
     private ArmaModel arma = new ArmaModel();
@@ -42,18 +38,24 @@
 
     private void Add()
     {
-        OnNuovaArma.InvokeAsync(arma);
-        arma = new ArmaModel();
+        if (!string.IsNullOrEmpty(arma.Nome.Trim()) && !string.IsNullOrEmpty(arma.NomeAbilita.Trim()))
+        {
+            OnNuovaArma.InvokeAsync(arma);
+            arma = new ArmaModel();
+        }
     }
 
-    private void ModalAbilita()
+    private async void ModalAbilita()
     {
         isModalAbilitaOpen = true;
+        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalAbilitaOpen);
     }
 
-    private void SelectAbilita(string abilita)
+    private async void SelectAbilita(string abilita)
     {
         arma.NomeAbilita = abilita;
         isModalAbilitaOpen = false;
+        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalAbilitaOpen);
+        Add();
     }
 }
