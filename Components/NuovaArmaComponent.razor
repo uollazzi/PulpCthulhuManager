@@ -1,7 +1,7 @@
 @inject IJSRuntime JSRuntime
-<button class="btn-primary w-full" @onclick="ModalAbilita">Aggiungi nuova arma</button>
+<button class="btn-primary w-full" @onclick="Open">Aggiungi nuova arma</button>
 
-@if (isModalAbilitaOpen)
+@if (isModalOpen)
 {
     <div class="fixed z-10 left-0 top-0 w-full h-screen overflow-y-hidden bg-white flex justify-center items-center">
         <div class="mx-4 my-auto p-4 bg-white">
@@ -14,7 +14,7 @@
                 <ul id="nomeAbilita">
                     @foreach (var abilitaCombattimento in ElencoAbilita)
                     {
-                        <li @onclick="@(() => SelectAbilita(abilitaCombattimento.Nome))">
+                        <li @onclick="@(() => Select(abilitaCombattimento.Nome))">
                             <div class="cursor-pointer text-teal-900">
                                 @abilitaCombattimento.Nome
                             </div>
@@ -28,7 +28,7 @@
 
 @code {
     private ArmaModel arma = new ArmaModel();
-    private bool isModalAbilitaOpen = false;
+    private bool isModalOpen = false;
 
     [Parameter]
     public EventCallback<ArmaModel> OnNuovaArma { get; set; }
@@ -45,17 +45,17 @@
         }
     }
 
-    private async void ModalAbilita()
+    private async void Open()
     {
-        isModalAbilitaOpen = true;
-        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalAbilitaOpen);
+        isModalOpen = true;
+        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalOpen);
     }
 
-    private async void SelectAbilita(string abilita)
+    private async void Select(string abilita)
     {
         arma.NomeAbilita = abilita;
-        isModalAbilitaOpen = false;
-        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalAbilitaOpen);
+        isModalOpen = false;
+        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalOpen);
         Add();
     }
 }
