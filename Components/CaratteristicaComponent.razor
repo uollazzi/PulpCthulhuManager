@@ -5,8 +5,8 @@
             @Caratteristica.Abbreviazione
         </div>
         <div class=" leading-6">
-            <input class="w-12 font-bold text-center text-lg select-all" value="@Caratteristica.Base"
-            @oninput="OnCaratteristicaBaseChanged" min="0" required />
+            <InputNumber class="w-12 font-bold text-center text-lg select-all" @bind-Value="Caratteristica.Base"
+            @oninput="OnCaratteristicaBaseChanged"></InputNumber>
         </div>
         <div class="leading-6 text-xs text-center">@Caratteristica.Arduo/@Caratteristica.Estremo</div>
     </div>

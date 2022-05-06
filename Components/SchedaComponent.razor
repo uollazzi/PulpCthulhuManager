@@ -3,85 +3,168 @@
 
 @if (scheda != null)
 {
-    <EditForm Model="@scheda">
-        <p>
-            <InputText @bind-Value="scheda.Nome" placeholder="Nome"></InputText>
-            <InputText @bind-Value="scheda.Archetipo" placeholder="Archetipo"></InputText>
-            <InputText @bind-Value="scheda.Professione" placeholder="Professione"></InputText>
-        </p>
-        <p>BD: @scheda.BonusDanno</p>
-        <p>Struttura: @scheda.Struttura</p>
-        <p>Movimento: @scheda.Movimento</p>
-        <p>PF Massimi: @scheda.PuntiFeritaMassimi</p>
-        <p>PF Attuali: @scheda.PuntiFeritaAttuali</p>
-        <p>PM Massimi: @scheda.PuntiMagiaMassimi</p>
-        <p>PM Attuali: @scheda.PuntiMagiaAttuali</p>
-        <p>Sanità Massima: @scheda.SanitaMassima</p>
-        <div class="flex flex-wrap border border-slate-900">
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.FOR" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.DES" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.COS" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.TAG" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.FAS" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.INT" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.POT" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-            <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                <CaratteristicaComponent Caratteristica="scheda.IST" CaratteristicaChanged="@UpdateUI">
-                </CaratteristicaComponent>
-            </div>
-        </div>
-        <br>
-        <div class="flex border border-slate-900">
-            <input class="w-full px-2 text-sm" @bind-value="cercaAbilita" @bind-value:event="oninput"
-            placeholder="Cerca abilità..." />
-            <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">
-                <i class="bi bi-x-square"></i>
-            </button>
-        </div>
-        <div class="flex flex-wrap border-x border-b border-slate-900">
-            @foreach (var abilita in scheda!.Abilita.Where(a => a.Nome.ToLower().Contains(cercaAbilita.ToLower())).OrderBy(o
-           => o.Nome))
-            {
-                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
-                    <AbilitaComponent abilita="abilita" OnDelete="DeleteAbilita"></AbilitaComponent>
+    <div class="mb-4">
+        <EditForm Model="@scheda">
+            <div class="flex flex-wrap border border-slate-900 mb-2 p-2">
+                <div>
+                    <label for="nome" class="text-sm">Nome</label>
+                    <InputText id="nome" @bind-Value="scheda.Nome" placeholder="Nome" class="font-bold"></InputText>
                 </div>
-            }
-        </div>
-        <NuovaAbilitaComponent OnNuovaAbilita="AddAbilita"></NuovaAbilitaComponent>
-        <br><br>
-        <div class="flex flex-wrap border border-slate-900">
-            @foreach (var arma in scheda!.Armi)
-            {
-                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
-                    <ArmaComponent Arma="arma" Abilita="@(scheda.Abilita.Single(s => s.Nome == arma.NomeAbilita))"
-                OnDelete="DeleteArma" BonusDanno="@scheda.BonusDanno"></ArmaComponent>
+                <div>
+                    <label for="archetipo" class="text-sm">Archetipo</label>
+                    <InputText id="archetipo" @bind-Value="scheda.Archetipo" placeholder="Archetipo"class="font-bold"></InputText>
                 </div>
-            }
-        </div>
-        <NuovaArmaComponent OnNuovaArma="AddArma" ElencoAbilita="scheda!.Abilita.Where(s => s.Combattimento).ToList()">
-        </NuovaArmaComponent>
-    </EditForm>
+                <div>
+                    <label for="professione" class="text-sm">Professione</label>
+                    <InputText id="professione" @bind-Value="scheda.Professione" placeholder="Professione"class="font-bold"></InputText>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap border border-slate-900 mb-2">
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.FOR" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.DES" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.COS" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.TAG" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.FAS" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.INT" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.POT" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
+                    <CaratteristicaComponent Caratteristica="scheda.IST" CaratteristicaChanged="@UpdateUI">
+                    </CaratteristicaComponent>
+                </div>
+            </div>
+            <div class="flex flex-wrap border border-slate-900 mb-2">
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        P.F.
+                    </div>
+                    <div class=" leading-6">
+                        <InputNumber class="w-12 font-bold text-center text-lg select-all"
+                        @bind-Value="scheda.PuntiFeritaAttuali"></InputNumber>
+                    </div>
+                    <div class="leading-6 text-xs text-center">Max @scheda.PuntiFeritaMassimi</div>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        Sanità
+                    </div>
+                    <div class=" leading-6">
+                        <InputNumber class="w-12 font-bold text-center text-lg select-all" @bind-Value="scheda.Sanita">
+                        </InputNumber>
+                    </div>
+                    <div class="leading-6 text-xs text-center">Max @scheda.SanitaMassima</div>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        Fortuna
+                    </div>
+                    <div class=" leading-6">
+                        <InputNumber class="w-12 font-bold text-center text-lg select-all" @bind-Value="scheda.Fortuna">
+                        </InputNumber>
+                    </div>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        P.M.
+                    </div>
+                    <div class=" leading-6">
+                        <InputNumber class="w-12 font-bold text-center text-lg select-all"
+                        @bind-Value="scheda.PuntiMagiaAttuali"></InputNumber>
+                    </div>
+                    <div class="leading-6 text-xs text-center">Max @scheda.PuntiMagiaMassimi</div>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        B.D.
+                    </div>
+                    <div class="w-12 text-center text-lg leading-6">
+                        @scheda.BonusDanno
+                    </div>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        Struttura
+                    </div>
+                    <div class="w-12 text-center text-lg leading-6">
+                        @scheda.Struttura
+                    </div>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        MOV
+                    </div>
+                    <div class="w-12 text-center text-lg leading-6">
+                        @scheda.Movimento
+                    </div>
+                </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        Schivare
+                    </div>
+                    <div class="w-12 text-center text-lg leading-6">
+                        @scheda.Schivare.Base
+                    </div>
+                    <div class="leading-6 text-xs text-center">@scheda.Schivare.Arduo/@scheda.Schivare.Estremo</div>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="flex border border-slate-900">
+                    <input class="w-full px-2 text-sm" @bind-value="cercaAbilita" @bind-value:event="oninput"
+                    placeholder="Cerca abilità..." />
+                    <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">
+                        <i class="bi bi-x-square"></i>
+                    </button>
+                </div>
+                <div class="flex flex-wrap border-x border-b border-slate-900">
+                    @foreach (var abilita in scheda!.Abilita.Where(a =>
+                   a.Nome.ToLower().Contains(cercaAbilita.ToLower())).OrderBy(o
+                   => o.Nome))
+                    {
+                        <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                            <AbilitaComponent abilita="abilita" OnDelete="DeleteAbilita"></AbilitaComponent>
+                        </div>
+                    }
+                </div>
+                <NuovaAbilitaComponent OnNuovaAbilita="AddAbilita"></NuovaAbilitaComponent>
+            </div>
+            <div class="mb-2">
+                <div class="flex flex-wrap border border-slate-900">
+                    @foreach (var arma in scheda!.Armi)
+                    {
+                        <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                            <ArmaComponent Arma="arma" Abilita="@(scheda.Abilita.Single(s => s.Nome == arma.NomeAbilita))"
+                        OnDelete="DeleteArma" BonusDanno="@scheda.BonusDanno"></ArmaComponent>
+                        </div>
+                    }
+                </div>
+                <NuovaArmaComponent OnNuovaArma="AddArma"
+                ElencoAbilita="scheda!.Abilita.Where(s => s.Combattimento).ToList()">
+                </NuovaArmaComponent>
+            </div>
+            <NoteComponent Titolo="Descrizione personale" Testo="@scheda.DescrizionePersonale"></NoteComponent>
+        </EditForm>
+    </div>
 }
 
 

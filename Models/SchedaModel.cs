@@ -14,6 +14,8 @@
         public string Archetipo { get; set; } = string.Empty;
         public string Residenza { get; set; } = string.Empty;
         public string LuogoNascita { get; set; } = string.Empty;
+
+        public string DescrizionePersonale { get; set; } = string.Empty;
         #endregion
 
         #region Caratteristiche        
@@ -75,6 +77,8 @@
             new AbilitaModel("Valore Credito", 0),
             new AbilitaModel("Valutare", 5)
         };
+
+        public AbilitaModel Schivare { get => Abilita.Single(s => s.Tag == TAG_SCHIVARE); }
         #endregion
 
         #region Tattiche

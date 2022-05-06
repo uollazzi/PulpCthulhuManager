@@ -4,38 +4,46 @@
 @if (isModalOpen)
 {
     <div class="fixed z-10 left-0 top-0 w-full h-screen overflow-y-hidden bg-white flex justify-center items-center">
-        <div class="mx-4 my-auto p-4 bg-white">
+        <div class="mx-4 my-auto p-2 bg-white flex-col">
             <div class="mb-4 flex items-end justify-end">
                 <button type="button" class="text-slate-400" @onclick="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
-            <div class="mb-4">
-                <label for="nomeArma" class="text-slate-400">Nome</label>
-                <input id="nomeArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Nome" />
+            <div class="flex gap-2">
+                <div class="mb-4 flex-[1_1_150px]">
+                    <label for="nomeArma" class="text-slate-400">Nome</label>
+                    <InputText id="nomeArma" type="text" class="w-full border border-slate-900 p-2" @bind-Value="arma.Nome">
+                    </InputText>
+                </div>
+                <div class="mb-4 flex-[1_1_150px]">
+                    <label for="danniArma" class="text-slate-400">Danni</label>
+                    <InputText id="danniArma" class="w-full border border-slate-900 p-2" @bind-Value="arma.Danni" />
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="danniArma" class="text-slate-400">Danni</label>
-                <input id="danniArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Danni" />
+            <div class="flex gap-2">
+                <div class="mb-4 flex-[1_1_150px]">
+                    <label for="gittataArma" class="text-slate-400">Gittata</label>
+                    <InputText id="gittataArma" class="w-full border border-slate-900 p-2" @bind-Value="arma.Gittata">
+                    </InputText>
+                </div>
+                <div class="mb-4 flex-[1_1_150px]">
+                    <label for="attacchiArma" class="text-slate-400">Attacchi</label>
+                    <InputText id="attacchiArma" class="w-full border border-slate-900 p-2" @bind-Value="arma.Attacchi">
+                    </InputText>
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="gittataArma" class="text-slate-400">Gittata</label>
-                <input id="gittataArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Gittata" />
-            </div>
-            <div class="mb-4">
-                <label for="attacchiArma" class="text-slate-400">Attacchi</label>
-                <input id="attacchiArma" type="text" class="w-full border border-slate-900 p-2"
-                @bind-value="arma.Attacchi" />
-            </div>
-            <div class="mb-4">
-                <label for="munizioniArma" class="text-slate-400">Munizioni</label>
-                <input id="munizioniArma" type="number" class="w-full border border-slate-900 p-2"
-                @bind-value="arma.Munizioni" />
-            </div>
-            <div class="mb-4">
-                <label for="malfunzionamentoArma" class="text-slate-400">Malf.</label>
-                <input id="malfunzionamentoArma" type="number" class="w-full border border-slate-900 p-2"
-                @bind-value="arma.Malfunzionamento" />
+            <div class="flex gap-2">
+                <div class="mb-4 flex-[1_1_150px]">
+                    <label for="munizioniArma" class="text-slate-400">Munizioni</label>
+                    <InputNumber id="munizioniArma" class="w-full border border-slate-900 p-2" @bind-Value="arma.Munizioni">
+                    </InputNumber>
+                </div>
+                <div class="mb-4 flex-[1_1_150px]">
+                    <label for="malfunzionamentoArma" class="text-slate-400">Malf.</label>
+                    <InputNumber id="malfunzionamentoArma" class="w-full border border-slate-900 p-2"
+                    @bind-Value="arma.Malfunzionamento"></InputNumber>
+                </div>
             </div>
             <div class="mb-4">
                 <InputCheckbox id="hasBonusDanno" class="m-2" @bind-Value="arma.ApplicaBonusDanno"></InputCheckbox>

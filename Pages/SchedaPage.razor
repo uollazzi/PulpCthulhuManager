@@ -4,10 +4,10 @@
 @inject IJSRuntime JSRuntime
 
 
-<div class="btn-group" role="group">
-    <button class="btn-primary bg-teal-900" @onclick="Nuova">Nuova</button>
-    <button class="btn-primary" onclick="document.getElementById('selectedFile').click();">Importa</button>
-    <button class="btn-primary" @onclick="Export">Esporta</button>
+<div class="btn-group mb-2 flex justify-between gap-2" role="group">
+    <button class="btn-primary flex-auto" @onclick="Nuova">Nuova</button>
+    <button class="btn-primary flex-auto" onclick="document.getElementById('selectedFile').click();">Importa</button>
+    <button class="btn-primary flex-auto" @onclick="Export">Esporta</button>
 </div>
 
 <InputFile id="selectedFile" OnChange="Import" style="display: none;" />
