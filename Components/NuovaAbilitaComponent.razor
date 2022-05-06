@@ -5,15 +5,23 @@
 {
     <div class="fixed z-10 left-0 top-0 w-full h-screen overflow-y-hidden bg-white flex justify-center items-center">
         <div class="mx-4 my-auto p-4 bg-white">
-            <div class="flex border-x border-b border-slate-900 items-center">
-
-                <InputCheckbox class="m-2" @bind-Value="abilita.Combattimento"></InputCheckbox>
-                <div class="whitespace-nowrap text-sm">
-                    combat?
-                </div>
-                <input type="text" class="w-full px-2 text-sm" @bind-value="abilita.Nome" placeholder="Nome abilità" />
+            <div class="mb-4 flex items-end justify-end">
+                <button type="button" class="text-slate-400" @onclick="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="mb-4">
+                <label for="nomeAbilita" class="text-slate-400">Nome abilità</label>
+                <input type="text" id="nomeAbilita" class="w-full border border-slate-900 p-2" @bind-value="abilita.Nome" />
+            </div>
+            <div class="mb-4">
+                <InputCheckbox id="isCombat" class="m-2" @bind-Value="abilita.Combattimento"></InputCheckbox>
+                <label for="isCombat" class="text-slate-400">Abilità di combattimento</label>
+            </div>
+            <div class="mb-4">
                 <button class="btn-primary w-full" @onclick="Add">Aggiungi</button>
             </div>
+
         </div>
     </div>
 }
@@ -30,16 +38,22 @@
         await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalOpen);
     }
 
-    private void Add()
+    private async void Close()
+    {
+        isModalOpen = false;
+        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalOpen);
+    }
+
+    private async void Add()
     {
         if (!string.IsNullOrEmpty(abilita.Nome.Trim()))
         {
-            OnNuovaAbilita.InvokeAsync(abilita);
             abilita.Base = 0;
             abilita.Custom = true;
-            OnNuovaAbilita.InvokeAsync(abilita);
+            await OnNuovaAbilita.InvokeAsync(abilita);
             abilita = new AbilitaModel();
         }
-
+        isModalOpen = false;
+        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalOpen);
     }
 }

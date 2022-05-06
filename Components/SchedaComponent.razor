@@ -55,7 +55,9 @@
         <div class="flex border border-slate-900">
             <input class="w-full px-2 text-sm" @bind-value="cercaAbilita" @bind-value:event="oninput"
             placeholder="Cerca abilità..." />
-            <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">X</button>
+            <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">
+                <i class="bi bi-x-square"></i>
+            </button>
         </div>
         <div class="flex flex-wrap border-x border-b border-slate-900">
             @foreach (var abilita in scheda!.Abilita.Where(a => a.Nome.ToLower().Contains(cercaAbilita.ToLower())).OrderBy(o

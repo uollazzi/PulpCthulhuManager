@@ -5,6 +5,11 @@
 {
     <div class="fixed z-10 left-0 top-0 w-full h-screen overflow-y-hidden bg-white flex justify-center items-center">
         <div class="mx-4 my-auto p-4 bg-white">
+            <div class="mb-4 flex items-end justify-end">
+                <button type="button" class="text-slate-400" @onclick="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
             <div class="mb-4">
                 <label for="nomeArma" class="text-slate-400">Nome</label>
                 <input id="nomeArma" type="text" class="w-full border border-slate-900 p-2" @bind-value="arma.Nome" />
@@ -12,7 +17,7 @@
             <div class="mb-4">
                 <label for="nomeAbilita" class="text-slate-400">Specifica Abilità</label>
                 <ul id="nomeAbilita">
-                    @foreach (var abilitaCombattimento in ElencoAbilita)
+                    @foreach (var abilitaCombattimento in ElencoAbilita.OrderBy(o => o.Nome))
                     {
                         <li @onclick="@(() => Select(abilitaCombattimento.Nome))">
                             <div class="cursor-pointer text-teal-900">
@@ -48,6 +53,12 @@
     private async void Open()
     {
         isModalOpen = true;
+        await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalOpen);
+    }
+
+    private async void Close()
+    {
+        isModalOpen = false;
         await JSRuntime.InvokeVoidAsync("bodyOverflow", isModalOpen);
     }
 
