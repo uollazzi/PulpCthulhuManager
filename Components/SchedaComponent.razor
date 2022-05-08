@@ -5,52 +5,54 @@
 {
     <div class="mb-4">
         <EditForm Model="@scheda">
-            <div class="flex flex-wrap border border-slate-900 mb-2 p-2">
+            <div class="flex flex-wrap border border-slate-900 mb-2 p-2 justify-items-start">
                 <div>
                     <label for="nome" class="text-sm">Nome</label>
                     <InputText id="nome" @bind-Value="scheda.Nome" placeholder="Nome" class="font-bold"></InputText>
                 </div>
                 <div>
                     <label for="archetipo" class="text-sm">Archetipo</label>
-                    <InputText id="archetipo" @bind-Value="scheda.Archetipo" placeholder="Archetipo"class="font-bold"></InputText>
+                    <InputText id="archetipo" @bind-Value="scheda.Archetipo" placeholder="Archetipo" class="font-bold">
+                    </InputText>
                 </div>
                 <div>
                     <label for="professione" class="text-sm">Professione</label>
-                    <InputText id="professione" @bind-Value="scheda.Professione" placeholder="Professione"class="font-bold"></InputText>
+                    <InputText id="professione" @bind-Value="scheda.Professione" placeholder="Professione"
+                    class="font-bold"></InputText>
                 </div>
             </div>
 
             <div class="flex flex-wrap border border-slate-900 mb-2">
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.FOR" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.FOR">
                     </CaratteristicaComponent>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.DES" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.DES">
                     </CaratteristicaComponent>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.COS" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.COS">
                     </CaratteristicaComponent>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.TAG" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.TAG">
                     </CaratteristicaComponent>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.FAS" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.FAS">
                     </CaratteristicaComponent>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.INT" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.INT">
                     </CaratteristicaComponent>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.POT" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.POT">
                     </CaratteristicaComponent>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white">
-                    <CaratteristicaComponent Caratteristica="scheda.IST" CaratteristicaChanged="@UpdateUI">
+                    <CaratteristicaComponent @bind-Caratteristica="scheda.IST">
                     </CaratteristicaComponent>
                 </div>
             </div>
@@ -75,6 +77,30 @@
                     </div>
                     <div class="leading-6 text-xs text-center">Max @scheda.SanitaMassima</div>
                 </div>
+                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                    <div class="text-center leading-6 text-sm">
+                        Sanità / 5
+                    </div>
+                    <div class="leading-6">
+                        <InputNumber class="w-12 font-bold text-center text-lg select-all"
+                        @bind-Value="scheda.SogliaPazziaPermanente">
+                        </InputNumber>
+                        <button @onclick="CalcQuintoPazzia"><i class="bi bi-calculator"></i></button>
+                    </div>
+                    <div class="leading-6 flex flex-row gap-2">
+                        <div>
+                            <InputCheckbox id="isTempPazzo" class="" @bind-Value="scheda.TemporaneamentePazzo">
+                            </InputCheckbox>
+                            <label for="isTempPazzo" class="text-xs">T</label>
+                        </div>
+                        <div>
+                            <InputCheckbox id="isPermPazzo" @bind-Value="scheda.PermanentementePazzo"></InputCheckbox>
+                            <label for="isPermPazzo" class="text-xs">P</label>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
                     <div class="text-center leading-6 text-sm">
                         Fortuna
@@ -118,15 +144,15 @@
                         @scheda.Movimento
                     </div>
                 </div>
-                <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
+                @* <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
                     <div class="text-center leading-6 text-sm">
-                        Schivare
+                    Schivare
                     </div>
                     <div class="w-12 text-center text-lg leading-6">
-                        @scheda.Schivare.Base
+                    @scheda.Schivare.Base
                     </div>
                     <div class="leading-6 text-xs text-center">@scheda.Schivare.Arduo/@scheda.Schivare.Estremo</div>
-                </div>
+                    </div> *@
             </div>
             <div class="mb-2">
                 <div class="flex border border-slate-900">
@@ -162,7 +188,56 @@
                 ElencoAbilita="scheda!.Abilita.Where(s => s.Combattimento).ToList()">
                 </NuovaArmaComponent>
             </div>
-            <NoteComponent Titolo="Descrizione personale" Testo="@scheda.DescrizionePersonale"></NoteComponent>
+            <div class="flex flex-wrap border border-slate-900 mb-2">
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Incontri con Strane Entità" @bind-Testo="@scheda.IncontriStraneEntita">
+                    </NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Talenti" @bind-Testo="@scheda.Talenti">
+                    </NoteComponent>
+                </div>                
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Descrizione personale" @bind-Testo="@scheda.DescrizionePersonale">
+                    </NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Tratti" @bind-Testo="@scheda.Tratti"></NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Ideologia/Credo" @bind-Testo="@scheda.IdeologiaCredo">
+                    </NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Ferite & Cicatrici" @bind-Testo="@scheda.FeriteCicatrici">
+                    </NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Persone importanti" @bind-Testo="@scheda.PerosneImportanti">
+                    </NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Fobie & Manie" @bind-Testo="@scheda.FobieManie"></NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Luoghi significativi" @bind-Testo="@scheda.LuoghiSignificativi">
+                    </NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Tomi Arcani, Incantesimi & Artefatti"
+                    @bind-Testo="@scheda.TomiArcaniIncantesimiArtefalli"></NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Oggetti di valore" @bind-Testo="@scheda.OggettiValore">
+                    </NoteComponent>
+                </div>
+                <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
+                    <NoteComponent Titolo="Attrezzature & Equipaggiamento"
+                    @bind-Testo="@scheda.AttrezzaturaEquipaggiamento">
+                    </NoteComponent>
+                </div>
+            </div>
+
         </EditForm>
     </div>
 }
@@ -212,6 +287,12 @@
     private void DeleteArma(ArmaModel e)
     {
         scheda!.Armi.Remove(e);
+        Salva();
+    }
+
+    private void CalcQuintoPazzia()
+    {
+        scheda!.SogliaPazziaPermanente = Convert.ToInt32(scheda.Sanita / 5);
         Salva();
     }
 }

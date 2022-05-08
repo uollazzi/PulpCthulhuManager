@@ -20,7 +20,7 @@
     -moz-appearance: textfield;
   }
 
-  input {
+  input, textarea {
     background-color: transparent;
   }
 
@@ -42,7 +42,7 @@
     @apply py-2 px-4 bg-teal-900 text-white hover:bg-teal-800;
   }
 
-  input {
+  input, textarea {
     @apply outline-0;
   }
 }

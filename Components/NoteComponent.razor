@@ -1,6 +1,6 @@
-<div class="flex flex-col border border-slate-900 mb-2 p-2">
-<h3>@Titolo</h3>
-<InputTextArea @bind-Value="Testo"></InputTextArea>
+<div class="flex flex-col p-2">
+    <h3 class="font-bold text-sm">@Titolo</h3>
+    <InputTextArea rows="6" @bind-Value="Testo" class="text-sm" @oninput="OnNotaChanged"></InputTextArea>
 </div>
 
 @code {
@@ -9,4 +9,12 @@
 
     [Parameter]
     public string Testo { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> TestoChanged { get; set; }
+
+    private async Task OnNotaChanged(ChangeEventArgs e)
+    {
+        await TestoChanged.InvokeAsync(e.Value?.ToString());
+    }
 }

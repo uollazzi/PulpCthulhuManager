@@ -16,6 +16,23 @@
         public string LuogoNascita { get; set; } = string.Empty;
 
         public string DescrizionePersonale { get; set; } = string.Empty;
+
+        public string Tratti { get; set; } = string.Empty;
+
+        public string IdeologiaCredo { get; set; } = string.Empty;
+
+        public string FeriteCicatrici { get; set; } = string.Empty;
+        public string PerosneImportanti { get; set; } = string.Empty;
+        public string FobieManie { get; set; } = string.Empty;
+        public string LuoghiSignificativi { get; set; } = string.Empty;
+        public string TomiArcaniIncantesimiArtefalli { get; set; } = string.Empty;
+        public string OggettiValore { get; set; } = string.Empty;
+        public string IncontriStraneEntita { get; set; } = string.Empty;
+        public string Talenti { get; set; } = string.Empty;
+
+        public string ContantiProprieta { get; set; } = string.Empty;
+
+        public string AttrezzaturaEquipaggiamento { get; set; } = string.Empty;
         #endregion
 
         #region Caratteristiche        
@@ -145,6 +162,8 @@
         public int SanitaMassima { get => 99 - Abilita.Single(a => a.Tag == TAG_MITI_CTHULHU).Base; }
         public bool TemporaneamentePazzo { get; set; } = false;
         public bool PermanentementePazzo { get; set; } = false;
+
+        public int SogliaPazziaPermanente { get; set; }
         public bool Morente { get => PuntiFeritaAttuali <= 0; }
         public int Fortuna { get; set; }
 
