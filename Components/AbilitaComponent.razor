@@ -1,35 +1,35 @@
-@if (abilita != null)
+@if (Abilita != null)
 {
     <div class="flex p-2 gap-2">
         <div class="leading-6 flex-grow-0">
-            <InputCheckbox @bind-Value="abilita.Utilizzata"></InputCheckbox>
+            <InputCheckbox @bind-Value="Abilita.Utilizzata"></InputCheckbox>
         </div>
         <div class="leading-6 flex-auto text-sm">
-            @abilita.Nome
+            @Abilita.Nome
         </div>
-        @if (abilita.Custom)
+        @if (Abilita.Custom)
         {
             <button type="button" @onclick="Delete">
                 <i class="bi bi-trash-fill"></i>
             </button>
         }
         <div class="leading-6 flex-grow-0">
-            <InputNumber class="w-10 font-bold text-right select-all" @bind-Value="abilita.Base" />
+            <InputNumber class="w-10 font-bold text-right select-all" @bind-Value="Abilita.Base" />
         </div>
-        <div class="leading-6 text-sm flex-[0_0_40px] text-center">@abilita.Arduo/@abilita.Estremo</div>
+        <div class="leading-6 text-sm flex-[0_0_40px] text-center">@Abilita.Arduo/@Abilita.Estremo</div>
     </div>
 }
 
 
 @code {
     [Parameter]
-    public AbilitaModel? abilita { get; set; }
+    public AbilitaModel? Abilita { get; set; }
 
     [Parameter]
     public EventCallback<AbilitaModel> OnDelete { get; set; }
 
     private async void Delete()
     {
-        await OnDelete.InvokeAsync(abilita);
+        await OnDelete.InvokeAsync(Abilita);
     }
 }
