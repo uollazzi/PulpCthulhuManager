@@ -14,7 +14,7 @@
     <div class="flex flex-row p-2 gap-2">
         <div class="leading-6 text-sm flex-auto">
             Danni<br>
-            <div class="font-bold">@(Arma.ApplicaBonusDanno ? Arma.Danni + BonusDanno : Arma.Danni)</div>
+            <div class="font-bold">@(Arma.ApplicaBonusDanno && BonusDanno != "-" ? Arma.Danni + BonusDanno : Arma.Danni)</div>
         </div>
         <div class="leading-6 text-sm flex-auto">
             Gittata<br>@Arma.Gittata

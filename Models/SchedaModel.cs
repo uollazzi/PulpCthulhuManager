@@ -65,6 +65,7 @@
             new AbilitaModel("Guidare Auto", 20),
             new AbilitaModel("Immersione", 1),
             new AbilitaModel("Individuare", 25),
+            new AbilitaModel("Intimidire", 15),
             new AbilitaModel("Lanciare", 20),
             new AbilitaModel("Legge", 5),
             new AbilitaModel("Leggere Labbra", 1),
@@ -173,7 +174,7 @@
 
         private (string BonusDanno, int Struttura) CalcolaBonusDannoStruttura()
         {
-            (string BonusDanno, int Struttura) retval = ("Nessuno", 0);
+            (string BonusDanno, int Struttura) retval = ("-", 0);
             var forTag = FOR.Base + TAG.Base;
 
             if (forTag <= 64)
@@ -188,7 +189,7 @@
             }
             else if (forTag <= 124)
             {
-                retval.BonusDanno = "Nessuno";
+                retval.BonusDanno = "-";
                 retval.Struttura = 0;
             }
             else if (forTag <= 164)
