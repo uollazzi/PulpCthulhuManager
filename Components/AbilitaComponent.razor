@@ -1,11 +1,14 @@
 @if (Abilita != null)
 {
-    <div class="flex p-2 gap-2">
+    <div class="flex py-2 px-1 gap-1">
         <div class="leading-6 flex-grow-0">
             <InputCheckbox @bind-Value="Abilita.Utilizzata"></InputCheckbox>
         </div>
         <div class="leading-6 flex-auto text-sm">
             @Abilita.Nome
+        </div>
+        <div class="flex-grow-0 leading-6 text-sm text-slate-400">
+            (@Abilita.Base)
         </div>
         @if (Abilita.Custom)
         {
