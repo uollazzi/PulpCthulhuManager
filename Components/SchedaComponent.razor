@@ -4,7 +4,7 @@
 @if (scheda != null)
 {
     <div class="mb-4">
-        <EditForm Model="@scheda">
+        <EditForm EditContext="@editContext">
             <div class="flex flex-wrap border border-slate-900 mb-2 p-2 justify-items-start">
                 <div>
                     <label for="nome" class="text-sm">Nome</label>
@@ -18,7 +18,7 @@
                 <div>
                     <label for="professione" class="text-sm">Professione</label>
                     <InputText id="professione" @bind-Value="scheda.Professione" placeholder="Professione"
-                    class="font-bold"></InputText>
+                           class="font-bold"></InputText>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                     </div>
                     <div class=" leading-6">
                         <InputNumber class="w-12 font-bold text-center text-lg select-all"
-                        @bind-Value="scheda.PuntiFeritaAttuali"></InputNumber>
+                                 @bind-Value="scheda.PuntiFeritaAttuali"></InputNumber>
                     </div>
                     <div class="leading-6 text-xs text-center">Max @scheda.PuntiFeritaMassimi</div>
                 </div>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="leading-6">
                         <InputNumber class="w-12 font-bold text-center text-lg select-all"
-                        @bind-Value="scheda.SogliaPazziaPermanente">
+                                 @bind-Value="scheda.SogliaPazziaPermanente">
                         </InputNumber>
                         <button @onclick="CalcQuintoPazzia"><i class="bi bi-calculator"></i></button>
                     </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class=" leading-6">
                         <InputNumber class="w-12 font-bold text-center text-lg select-all"
-                        @bind-Value="scheda.PuntiMagiaAttuali"></InputNumber>
+                                 @bind-Value="scheda.PuntiMagiaAttuali"></InputNumber>
                     </div>
                     <div class="leading-6 text-xs text-center">Max @scheda.PuntiMagiaMassimi</div>
                 </div>
@@ -145,19 +145,19 @@
                     </div>
                 </div>
                 @* <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
-                    <div class="text-center leading-6 text-sm">
-                    Schivare
-                    </div>
-                    <div class="w-12 text-center text-lg leading-6">
-                    @scheda.Schivare.Base
-                    </div>
-                    <div class="leading-6 text-xs text-center">@scheda.Schivare.Arduo/@scheda.Schivare.Estremo</div>
-                    </div> *@
+            <div class="text-center leading-6 text-sm">
+            Schivare
+            </div>
+            <div class="w-12 text-center text-lg leading-6">
+            @scheda.Schivare.Base
+            </div>
+            <div class="leading-6 text-xs text-center">@scheda.Schivare.Arduo/@scheda.Schivare.Estremo</div>
+            </div> *@
             </div>
             <div class="mb-2">
                 <div class="flex border border-slate-900">
                     <input class="w-full px-2 text-sm" @bind-value="cercaAbilita" @bind-value:event="oninput"
-                    placeholder="Cerca abilità..." />
+                       placeholder="Cerca abilità..." />
                     <button class="btn-primary" @onclick="@(e => cercaAbilita = "")">
                         <i class="bi bi-x-square"></i>
                     </button>
@@ -180,12 +180,12 @@
                     {
                         <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
                             <ArmaComponent Arma="arma" Abilita="@(scheda.Abilita.Single(s => s.Nome == arma.NomeAbilita))"
-                        OnDelete="DeleteArma" BonusDanno="@scheda.BonusDanno"></ArmaComponent>
+                                   OnDelete="DeleteArma" BonusDanno="@scheda.BonusDanno"></ArmaComponent>
                         </div>
                     }
                 </div>
                 <NuovaArmaComponent OnNuovaArma="AddArma"
-                ElencoAbilita="scheda!.Abilita.Where(s => s.Combattimento).ToList()">
+                                ElencoAbilita="scheda!.Abilita.Where(s => s.Combattimento).ToList()">
                 </NuovaArmaComponent>
             </div>
             <div class="flex flex-wrap border border-slate-900 mb-2">
@@ -196,7 +196,7 @@
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
                     <NoteComponent Titolo="Talenti" @bind-Testo="@scheda.Talenti">
                     </NoteComponent>
-                </div>                
+                </div>
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
                     <NoteComponent Titolo="Descrizione personale" @bind-Testo="@scheda.DescrizionePersonale">
                     </NoteComponent>
@@ -225,7 +225,7 @@
                 </div>
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
                     <NoteComponent Titolo="Tomi Arcani, Incantesimi & Artefatti"
-                    @bind-Testo="@scheda.TomiArcaniIncantesimiArtefalli"></NoteComponent>
+                               @bind-Testo="@scheda.TomiArcaniIncantesimiArtefalli"></NoteComponent>
                 </div>
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
                     <NoteComponent Titolo="Oggetti di valore" @bind-Testo="@scheda.OggettiValore">
@@ -233,7 +233,7 @@
                 </div>
                 <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
                     <NoteComponent Titolo="Attrezzature & Equipaggiamento"
-                    @bind-Testo="@scheda.AttrezzaturaEquipaggiamento">
+                               @bind-Testo="@scheda.AttrezzaturaEquipaggiamento">
                     </NoteComponent>
                 </div>
             </div>
@@ -244,10 +244,23 @@
 
 
 @code {
+    private EditContext? editContext;
+
     [Parameter]
     public SchedaModel? scheda { get; set; }
 
     private string cercaAbilita { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        editContext = new(scheda!);
+        editContext.OnFieldChanged += EditContext_OnFieldChanged;
+    }
+
+    private void EditContext_OnFieldChanged(object? sender, FieldChangedEventArgs e)
+    {
+        Salva();
+    }
 
     private async void Salva()
     {
