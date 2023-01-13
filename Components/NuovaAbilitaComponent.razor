@@ -10,10 +10,17 @@
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
-            <div class="mb-4">
-                <label for="nomeAbilita" class="text-slate-400">Nome abilità</label>
-                <InputText id="nomeAbilita" class="w-full border border-slate-900 p-2" @bind-Value="abilita.Nome">
-                </InputText>
+            <div class="flex gap-2 mb-4">
+                <div class="flex-auto w-70">
+                    <label for="nomeAbilita" class="text-slate-400">Nome abilità</label>
+                    <InputText id="nomeAbilita" class="w-full border border-slate-900 p-2" @bind-Value="abilita.Nome">
+                    </InputText>
+                </div>
+                <div class="flex-1 w-30">
+                    <label for="abilitaDefault" class="text-slate-400">Default</label>
+                    <InputNumber id="abilitaDefault" class="w-full border border-slate-900 p-2"
+                    @bind-Value="abilita.Default" />
+                </div>
             </div>
             <div class="mb-4">
                 <InputCheckbox id="isCombat" class="m-2" @bind-Value="abilita.Combattimento"></InputCheckbox>
