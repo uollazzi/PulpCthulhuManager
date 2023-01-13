@@ -6,7 +6,7 @@
   "scripts": {
     "tw": "npx tailwindcss -i ./src/style.css -o ./wwwroot/css/app.css --watch",
     "tw:prod": "npx tailwindcss -i ./src/style.css -o ./wwwroot/css/app.css --minify",
-    "publish": "npm run tw:prod && dotnet publish -c Release -o release && firebase deploy"
+    "publish": "npm run tw:prod && dotnet publish -c Release -o release --version-suffix 1.1.0 && firebase deploy"
   },
   "repository": {
     "type": "git",

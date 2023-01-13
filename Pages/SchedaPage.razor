@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using System.Text.Json
+@using System.Reflection;
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IJSRuntime JSRuntime
 
@@ -14,12 +15,17 @@
 
 <SchedaComponent scheda="@scheda"></SchedaComponent>
 
+<div class="text-center text-sm text-slate-400">@version</div>
+
 @code {
     SchedaModel scheda = new SchedaModel();
+    string version = "";
 
     protected override async Task OnInitializedAsync()
     {
         scheda = await localStorage.GetItemAsync<SchedaModel>("scheda");
+
+        version = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
     }
 
     private void Nuova()
