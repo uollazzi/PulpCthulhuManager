@@ -4,21 +4,20 @@
 @if (scheda != null)
 {
     <div class="mb-4">
-        <EditForm EditContext="@editContext">
+        <EditForm Model="@scheda">
             <div class="flex flex-wrap border border-slate-900 mb-2 p-2 justify-items-start">
                 <div>
                     <label for="nome" class="text-sm">Nome</label>
-                    <InputText id="nome" @bind-Value="scheda.Nome" placeholder="Nome" class="font-bold"></InputText>
+                    <input id="nome" @bind="scheda.Nome" @bind:event="oninput" placeholder="Nome" class="font-bold">
                 </div>
                 <div>
                     <label for="archetipo" class="text-sm">Archetipo</label>
-                    <InputText id="archetipo" @bind-Value="scheda.Archetipo" placeholder="Archetipo" class="font-bold">
-                    </InputText>
+                    <input id="archetipo" @bind="scheda.Archetipo" @bind:event="oninput" placeholder="Archetipo" class="font-bold">
                 </div>
                 <div>
                     <label for="professione" class="text-sm">Professione</label>
-                    <InputText id="professione" @bind-Value="scheda.Professione" placeholder="Professione"
-                           class="font-bold"></InputText>
+                    <input id="professione" @bind="scheda.Professione" @bind:event="oninput" placeholder="Professione"
+                       class="font-bold">
                 </div>
             </div>
 
@@ -62,8 +61,9 @@
                         P.F.
                     </div>
                     <div class=" leading-6">
-                        <InputNumber class="w-12 font-bold text-center text-lg select-all"
-                                 @bind-Value="scheda.PuntiFeritaAttuali"></InputNumber>
+                        <input type="number" class="w-12 font-bold text-center text-lg select-all"
+                           @bind="scheda.PuntiFeritaAttuali" @bind:event="oninput">
+
                     </div>
                     <div class="leading-6 text-xs text-center">Max @scheda.PuntiFeritaMassimi</div>
                 </div>
@@ -72,8 +72,7 @@
                         Sanità
                     </div>
                     <div class=" leading-6">
-                        <InputNumber class="w-12 font-bold text-center text-lg select-all" @bind-Value="scheda.Sanita">
-                        </InputNumber>
+                        <input type="number" class="w-12 font-bold text-center text-lg select-all" @bind="scheda.Sanita" @bind:event="oninput">
                     </div>
                     <div class="leading-6 text-xs text-center">Max @scheda.SanitaMassima</div>
                 </div>
@@ -82,19 +81,17 @@
                         Sanità / 5
                     </div>
                     <div class="leading-6">
-                        <InputNumber class="w-12 font-bold text-center text-lg select-all"
-                                 @bind-Value="scheda.SogliaPazziaPermanente">
-                        </InputNumber>
+                        <input type="number" class="w-12 font-bold text-center text-lg select-all"
+                           @bind="scheda.SogliaPazziaPermanente" @bind:event="oninput">
                         <button @onclick="CalcQuintoPazzia"><i class="bi bi-calculator"></i></button>
                     </div>
                     <div class="leading-6 flex flex-row gap-2">
                         <div>
-                            <InputCheckbox id="isTempPazzo" class="" @bind-Value="scheda.TemporaneamentePazzo">
-                            </InputCheckbox>
+                            <input type="checkbox" id="isTempPazzo" class="" @bind="scheda.TemporaneamentePazzo">
                             <label for="isTempPazzo" class="text-xs">T</label>
                         </div>
                         <div>
-                            <InputCheckbox id="isPermPazzo" @bind-Value="scheda.PermanentementePazzo"></InputCheckbox>
+                            <input type="checkbox" id="isPermPazzo" @bind="scheda.PermanentementePazzo">
                             <label for="isPermPazzo" class="text-xs">P</label>
                         </div>
                     </div>
@@ -106,8 +103,7 @@
                         Fortuna
                     </div>
                     <div class=" leading-6">
-                        <InputNumber class="w-12 font-bold text-center text-lg select-all" @bind-Value="scheda.Fortuna">
-                        </InputNumber>
+                        <input type="number" class="w-12 font-bold text-center text-lg select-all" @bind="scheda.Fortuna" @bind:event="oninput">
                     </div>
                 </div>
                 <div class="flex-[25%] lg:flex-1 odd:bg-gray-200 even:bg-white flex flex-col p-2 items-center">
@@ -115,8 +111,8 @@
                         P.M.
                     </div>
                     <div class=" leading-6">
-                        <InputNumber class="w-12 font-bold text-center text-lg select-all"
-                                 @bind-Value="scheda.PuntiMagiaAttuali"></InputNumber>
+                        <input type="number" class="w-12 font-bold text-center text-lg select-all"
+                           @bind="scheda.PuntiMagiaAttuali" @bind:event="oninput">
                     </div>
                     <div class="leading-6 text-xs text-center">Max @scheda.PuntiMagiaMassimi</div>
                 </div>
@@ -168,7 +164,7 @@
                    => o.Nome))
                     {
                         <div class="lg:flex-[0_1_50%] flex-[0_1_100%] odd:bg-gray-200 even:bg-white">
-                            <AbilitaComponent Abilita="abilita" OnDelete="DeleteAbilita"></AbilitaComponent>
+                            <AbilitaComponent Abilita="abilita" OnDelete="DeleteAbilita" OnChange="StateHasChanged"></AbilitaComponent>
                         </div>
                     }
                 </div>
@@ -244,8 +240,6 @@
 
 
 @code {
-    private EditContext? editContext;
-
     [Parameter]
     public SchedaModel? scheda { get; set; }
 
@@ -253,25 +247,23 @@
 
     protected override void OnInitialized()
     {
-        editContext = new(scheda!);
-        editContext.OnFieldChanged += EditContext_OnFieldChanged;
-    }
 
-    private void EditContext_OnFieldChanged(object? sender, FieldChangedEventArgs e)
-    {
-        Salva();
     }
 
     private async void Salva()
     {
+        Console.WriteLine("Salvo!");
         await localStorage.SetItemAsync("scheda", scheda);
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
-        if (firstRender) JSRuntime.InvokeVoidAsync("makeSelectable");
-        Salva();
+
+        if (firstRender)
+            JSRuntime.InvokeVoidAsync("makeSelectable");
+        else
+            Salva();
     }
 
     private void UpdateUI(CaratteristicaModel e)

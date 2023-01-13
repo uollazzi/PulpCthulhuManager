@@ -2,7 +2,7 @@
 {
     <div class="flex py-2 px-1 gap-1">
         <div class="leading-6 flex-grow-0">
-            <InputCheckbox @bind-Value="Abilita.Utilizzata"></InputCheckbox>
+            <input type="checkbox" checked="@Abilita.Utilizzata" @onchange="AbilitaUtilizzataChange" />
         </div>
         <div class="leading-6 flex-auto text-sm">
             @Abilita.Nome
@@ -17,7 +17,7 @@
             </button>
         }
         <div class="leading-6 flex-grow-0">
-            <InputNumber class="w-10 font-bold text-right select-all" @bind-Value="Abilita.Base" />
+            <input type="number" class="w-10 font-bold text-right select-all" value="@Abilita.Base" @oninput="AbilitaBaseChange" />
         </div>
         <div class="leading-6 text-sm flex-[0_0_40px] text-center">@Abilita.Arduo/@Abilita.Estremo</div>
     </div>
@@ -31,8 +31,25 @@
     [Parameter]
     public EventCallback<AbilitaModel> OnDelete { get; set; }
 
+    [Parameter]
+    public EventCallback<AbilitaModel> OnChange { get; set; }
+
     private async void Delete()
     {
         await OnDelete.InvokeAsync(Abilita);
+    }
+
+    private async void AbilitaBaseChange(ChangeEventArgs e)
+    {
+        var v = !string.IsNullOrEmpty(e.Value?.ToString()) ? Convert.ToInt32(e.Value) : 0;
+        Abilita.Base = v;
+        await OnChange.InvokeAsync(Abilita);
+    }
+
+    private async void AbilitaUtilizzataChange(ChangeEventArgs e)
+    {
+        var v = !string.IsNullOrEmpty(e.Value?.ToString()) ? Convert.ToBoolean(e.Value) : false;
+        Abilita.Utilizzata = v;
+        await OnChange.InvokeAsync(Abilita);
     }
 }

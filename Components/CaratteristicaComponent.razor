@@ -5,8 +5,8 @@
             @Caratteristica.Abbreviazione
         </div>
         <div class=" leading-6">
-            <InputNumber class="w-12 font-bold text-center text-lg select-all" @bind-Value="Caratteristica.Base"
-            @oninput="OnCaratteristicaBaseChanged"></InputNumber>
+            <input type="number" class="w-12 font-bold text-center text-lg select-all" value="@Caratteristica.Base"
+                     @oninput="OnCaratteristicaBaseChanged"></input>
         </div>
         <div class="leading-6 text-xs text-center">@Caratteristica.Arduo/@Caratteristica.Estremo</div>
     </div>
@@ -21,7 +21,7 @@
     public EventCallback<CaratteristicaModel> CaratteristicaChanged { get; set; }
 
     private async Task OnCaratteristicaBaseChanged(ChangeEventArgs e)
-    {        
+    {
         var v = !string.IsNullOrEmpty(e.Value?.ToString()) ? Convert.ToInt32(e.Value) : 0;
         Caratteristica.Base = v;
         await CaratteristicaChanged.InvokeAsync(Caratteristica);
