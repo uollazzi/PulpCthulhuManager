@@ -1,4 +1,7 @@
-﻿<div class="flex flex-col">
+﻿<style>
+
+</style>
+<div class="flex flex-col">
     <button class="py-2 px-4 bg-gray-400 hover:bg-gray-300 w-full" @onclick="() => ToggleRitratto()">
         @(RitrattoVisibile ? "Nascondi" : "Mostra") Ritratto
     </button>
@@ -8,10 +11,11 @@
             @if (!string.IsNullOrEmpty(Ritratto))
             {
                 <div class="flex justify-center">
-                    <img class="max-h-96" src="data:image/png;base64,@Ritratto" />
+                    <img class="lg:max-w-lg aspect-square object-cover" src="data:image/png;base64,@Ritratto" />
                 </div>
             }
-            <InputFile OnChange="@LoadRitratto" class="mt-2 block w-full text-sm text-slate-400 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold" />
+            <InputFile OnChange="@LoadRitratto"
+            class="mt-2 block w-full text-sm text-slate-400 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold" />
         </div>
     }
 </div>
