@@ -1,0 +1,65 @@
+﻿<div class="flex flex-col">
+    <button class="py-2 px-4 bg-gray-400 hover:bg-gray-300 w-full" @onclick="() => ToggleRitratto()">
+        @(RitrattoVisibile ? "Nascondi" : "Mostra") Ritratto
+    </button>
+    @if (RitrattoVisibile)
+    {
+        <div class="p-2 flex-1">
+            @if (!string.IsNullOrEmpty(Ritratto))
+            {
+                <div class="flex justify-center">
+                    <img class="max-h-96" src="data:image/png;base64,@Ritratto" />
+                </div>
+            }
+            <InputFile OnChange="@LoadRitratto" class="mt-2 block w-full text-sm text-slate-400 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold" />
+        </div>
+    }
+</div>
+@code {
+    [Parameter]
+    public string Ritratto { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> RitrattoChanged { get; set; }
+
+    [Parameter]
+    public bool RitrattoVisibile { get; set; } = true;
+
+    [Parameter]
+    public EventCallback<bool> RitrattoVisibileChanged { get; set; }
+
+    private IBrowserFile file;
+
+    private async Task OnNotaChanged(ChangeEventArgs e)
+    {
+        await RitrattoChanged.InvokeAsync(e.Value?.ToString());
+    }
+
+    private async Task ToggleRitratto()
+    {
+        RitrattoVisibile = !RitrattoVisibile;
+        await RitrattoVisibileChanged.InvokeAsync(RitrattoVisibile);
+    }
+
+    private async Task LoadRitratto(InputFileChangeEventArgs e)
+    {
+        string base64String = "";
+
+        file = e.File;
+
+        try
+        {
+            await using MemoryStream fs = new MemoryStream();
+            await e.File.OpenReadStream(maxAllowedSize: 1024 * 1024).CopyToAsync(fs); // 1MB MAX
+            base64String = Convert.ToBase64String(fs.ToArray());
+
+            Ritratto = base64String;
+            await RitrattoChanged.InvokeAsync(base64String);
+        }
+
+        catch (Exception ex)
+        {
+            Console.WriteLine("LoadRitratto: " + ex.Message);
+        }
+    }
+}

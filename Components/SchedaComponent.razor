@@ -5,10 +5,18 @@
 {
     <div class="mb-4">
         <EditForm Model="@scheda">
+            <div class="border border-slate-900 bg-gray-200 mb-2">
+                <RitrattoComponent @bind-Ritratto="scheda.Ritratto" @bind-RitrattoVisibile="scheda.RitrattoVisibile"></RitrattoComponent>
+            </div>
             <div class="flex flex-wrap border border-slate-900 mb-2 p-2 justify-items-start">
                 <div>
                     <label for="nome" class="text-sm">Nome</label>
                     <input id="nome" @bind="scheda.Nome" @bind:event="oninput" placeholder="Nome" class="font-bold">
+                </div>
+                <div>
+                    <label for="eta" class="text-sm">Età</label>
+                    <input id="eta" @bind="scheda.Eta" @bind:event="oninput" placeholder="Età"
+                       class="font-bold">
                 </div>
                 <div>
                     <label for="archetipo" class="text-sm">Archetipo</label>

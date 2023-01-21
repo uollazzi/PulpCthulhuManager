@@ -33,6 +33,10 @@
         public string ContantiProprieta { get; set; } = string.Empty;
 
         public string AttrezzaturaEquipaggiamento { get; set; } = string.Empty;
+
+        public string Ritratto { get; set; } = string.Empty;
+
+        public bool RitrattoVisibile { get; set; } = true;
         #endregion
 
         #region Caratteristiche        
